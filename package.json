@@ -1,0 +1,34 @@
+{
+  "name": "tech_blog_mvc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd dist && node server.js",
+    "seed": "cd dist && seeds/seed.js"    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pattiqus/Tech_Blog_MVC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pattiqus/Tech_Blog_MVC/issues"
+  },
+  "homepage": "https://github.com/Pattiqus/Tech_Blog_MVC#readme",
+  "dependencies": {
+    "@types/node": "^17.0.21",
+    "bcrypt": "^5.0.1",
+    "connect-session-sequelize": "^7.1.2",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.3",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.17.0",
+    "ts-loader": "^9.2.7",
+    "typescript": "^4.6.2"
+  }
+}
