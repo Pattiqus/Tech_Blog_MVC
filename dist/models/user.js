@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -49,9 +50,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
-// import { Model, DataTypes } from 'sequelize';
-var _a = require('sequelize'), Model = _a.Model, DataTypes = _a.DataTypes;
+Object.defineProperty(exports, "__esModule", { value: true });
+var sequelize_1 = require("sequelize");
+// const { Model, DataTypes } = require('sequelize');
 var bcrypt = require('bcrypt');
 var sequelize = require('../config/connection');
 var User = /** @class */ (function (_super) {
@@ -63,20 +64,20 @@ var User = /** @class */ (function (_super) {
         return bcrypt.compareSync(loginPw, this.password);
     };
     return User;
-}(Model));
+}(sequelize_1.Model));
 User.init({
     id: {
-        type: DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
     },
     username: {
-        type: DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
     email: {
-        type: DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
@@ -84,7 +85,7 @@ User.init({
         },
     },
     password: {
-        type: DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
         validate: {
             len: [8],
@@ -92,7 +93,7 @@ User.init({
     },
 }, {
     hooks: {
-        beforeCreate: function (newUserData) { return __awaiter(_this, void 0, void 0, function () {
+        beforeCreate: function (newUserData) { return __awaiter(void 0, void 0, void 0, function () {
             var _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
@@ -105,7 +106,7 @@ User.init({
                 }
             });
         }); },
-        beforeUpdate: function (updatedUserData) { return __awaiter(_this, void 0, void 0, function () {
+        beforeUpdate: function (updatedUserData) { return __awaiter(void 0, void 0, void 0, function () {
             var _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {

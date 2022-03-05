@@ -1,5 +1,5 @@
-// import { Model, DataTypes } from '@sequelize/core';
-const { Model, DataTypes } = require('sequelize');
+import { Model, DataTypes } from 'sequelize';
+// const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Post extends Model {}

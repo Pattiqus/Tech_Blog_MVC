@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -13,8 +14,9 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-// import { Model, DataTypes } from '@sequelize/core';
-var _a = require('sequelize'), Model = _a.Model, DataTypes = _a.DataTypes;
+Object.defineProperty(exports, "__esModule", { value: true });
+var sequelize_1 = require("sequelize");
+// const { Model, DataTypes } = require('sequelize');
 var sequelize = require('../config/connection');
 var Post = /** @class */ (function (_super) {
     __extends(Post, _super);
@@ -22,24 +24,24 @@ var Post = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     return Post;
-}(Model));
+}(sequelize_1.Model));
 Post.init({
     id: {
-        type: DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
     },
     title: {
-        type: DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
     contents: {
-        type: DataTypes.TEXT,
+        type: sequelize_1.DataTypes.TEXT,
         allowNull: false,
     },
     user_id: {
-        type: DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'user',
