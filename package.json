@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd dist && node server.js",
-    "seed": "cd dist && seeds/seed.js"    
+    "seed": "cd dist && seeds/seed.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Pattiqus/Tech_Blog_MVC#readme",
   "dependencies": {
+    "@sequelize/core": "^7.0.0-alpha.10",
     "@types/node": "^17.0.21",
     "bcrypt": "^5.0.1",
     "connect-session-sequelize": "^7.1.2",
