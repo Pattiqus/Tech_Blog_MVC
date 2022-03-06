@@ -2,10 +2,16 @@
   "name": "tech_blog_mvc",
   "version": "1.0.0",
   "description": "",
-  "main": "webpack.config.js",
+  "main": "dist/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd dist && node server.js",
+    "clean": "rimraf dist/*",
+    "copy-assets": "ts-node tools/copyAssets",
+    "lint": "eslint . --fix",
+    "tsc": "tsc",
+    "build": "npm-run-all clean lint tsc",
+    "dev:start": "npm-run-all build start",
+    "dev": "nodemon --watch src -e ts,ejs --exec npm run dev:start",
+    "start": "node dist/server.js",
     "seed": "cd dist && seeds/seed.js"
   },
   "repository": {
@@ -21,7 +27,7 @@
   "homepage": "https://github.com/Pattiqus/Tech_Blog_MVC#readme",
   "dependencies": {
     "@sequelize/core": "^7.0.0-alpha.10",
-    "@types/node": "^17.0.21",
+    "@types/express-session": "^1.17.4",
     "bcrypt": "^5.0.1",
     "connect-session-sequelize": "^7.1.2",
     "dotenv": "^16.0.0",
@@ -31,5 +37,22 @@
     "sequelize": "^6.17.0",
     "ts-loader": "^9.2.7",
     "typescript": "^4.6.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^17.0.21",
+    "@types/shelljs": "^0.8.11",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "fs-extra": "^10.0.1",
+    "nodemon": "^2.0.15",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
+    "shelljs": "^0.8.5",
+    "ts-node": "^10.6.0"
   }
 }

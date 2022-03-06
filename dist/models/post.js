@@ -14,10 +14,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var sequelize_1 = require("sequelize");
 // const { Model, DataTypes } = require('sequelize');
-var sequelize = require('../config/connection');
+var connection_1 = __importDefault(require("../config/connection"));
 var Post = /** @class */ (function (_super) {
     __extends(Post, _super);
     function Post() {
@@ -44,12 +47,16 @@ Post.init({
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'user',
-            key: 'id'
-        }
-    }
-}, { sequelize: sequelize, timestamps: false,
+            model: "user",
+            key: "id",
+        },
+    },
+}, {
+    sequelize: connection_1.default,
+    timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'post', });
+    modelName: "post",
+});
 module.exports = Post;
+exports.default = Post;

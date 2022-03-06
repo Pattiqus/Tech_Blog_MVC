@@ -10,7 +10,7 @@
       "baseUrl": ".",
       "paths": {
         "@/*": ["src/*"],
-        "routes/*": [ "src/routes/*" ],
+        "routes/*": [ "src/controllers/*" ],
       }
     },
     "include": ["src/**/*.ts", "types"],

@@ -1,13 +1,30 @@
-import { Model, DataTypes } from 'sequelize';
-import { defaultValueSchemable } from 'sequelize/types/utils';
+import { Model, DataTypes } from "sequelize";
+
 // const { Model, DataTypes } = require('sequelize');
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
 // const bcrypt = require('bcrypt');
-const sequelize = require('../config/connection');
-const userSchema = new 
+import sequelize from "../config/connection";
+
 class User extends Model {
+  public id!: number;
+  public username: string;
+  public email: string;
+  public password: string;
+
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
+  }
+
+  hashPassword(userData) {
+    return bcrypt.hash(userData.password, 10);
+  }
+
+  getPassword() {
+    return this.password;
+  }
+
+  setPassword(password) {
+    this.password = password;
   }
 }
 
@@ -35,27 +52,26 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [8],
+        length: 8,
       },
     },
   },
   {
     hooks: {
-      beforeCreate: async (newUserData) => {
-        newUserData.password = await bcrypt.hash(newUserData.password, 10);
-        return newUserData;
+      beforeCreate: (userData, options) => {
+        userData.password = userData.hashPassword(userData);
       },
-      beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
-        return updatedUserData;
+      beforeUpdate: (userData) => {
+        userData.password = userData.hashPassword(userData);
       },
     },
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'user',
+    modelName: "user",
   }
 );
 
-module.exports = User;
+// module.exports = User;
+export default User;

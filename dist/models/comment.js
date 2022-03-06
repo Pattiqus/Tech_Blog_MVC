@@ -14,10 +14,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@sequelize/core");
 // const { Model, DataTypes } = require('sequelize');
-var sequelize = require('../config/connection');
+// const sequelize = require("../config/connection");
+var connection_1 = __importDefault(require("../config/connection"));
 var Comment = /** @class */ (function (_super) {
     __extends(Comment, _super);
     function Comment() {
@@ -40,20 +44,24 @@ Comment.init({
         type: core_1.DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'user',
-            key: 'id'
-        }
+            model: "user",
+            key: "id",
+        },
     },
     post_id: {
         type: core_1.DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'post',
-            key: 'id'
-        }
+            model: "post",
+            key: "id",
+        },
     },
-}, { sequelize: sequelize, timestamps: false,
+}, {
+    sequelize: connection_1.default,
+    timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'post', });
-module.exports = Comment;
+    modelName: "post",
+});
+// module.exports = Comment;
+exports.default = Comment;
