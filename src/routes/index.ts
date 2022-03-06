@@ -19,11 +19,13 @@ appRouter.get("/", homeController.showHomePage);
 appRouter.get("/test", (req: Request, res: Response) => {
   res.json("Test");
 });
-//   app.get("/login", LoginController);
+
+// # Client-Side: Login Page
+appRouter.get("/login", loginController.showLoginPage);
+appRouter.post("/api/v1/auth", loginController.showLoginPage);
 
 // # Back-End Routes
 // # API Routes
-//   app.get("/api/v1/comment", CommentApiController);
-//   app.patch("/api/v1/comment/:id", UserApiController.patchUser);
+//   app.get("/api/v1/comment", commentApiController);
 
 export default appRouter;

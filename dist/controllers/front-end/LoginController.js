@@ -22,6 +22,15 @@ var LoginController = /** @class */ (function (_super) {
     function LoginController() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    LoginController.prototype.showLoginPage = function (req, res) {
+        // # Retrieve: Data
+        var loginPageData = {
+            script_extras: ["login.js"],
+            styles_extras: [],
+        };
+        // # Render: View
+        res.render("login", loginPageData);
+    };
     return LoginController;
 }(Controller_1.Controller));
 exports.LoginController = LoginController;

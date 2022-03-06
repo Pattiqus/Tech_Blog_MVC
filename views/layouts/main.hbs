@@ -5,8 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Blog</title>
-  <link rel="stylesheet" href="/css/jass.css">
-  <link rel="stylesheet" href="/css/style.css">
+  {{!-- <link rel="stylesheet" href="/css/jass.css"> --}}
+  <link rel="stylesheet" href="/css/styles.min.css">
+
+  <!-- Prepend any necessary css scripts -->	
+  {{#if styles_extra }} 
+    {{#each styles_extra}}
+      <link rel="stylesheet" type="text/css" href="/css/{{this}}" />
+    {{/each}}
+  {{/if}}
 </head>
 
 <body>
@@ -34,6 +41,12 @@
       
     </footer>
   </div>
+
+  {{#if script_extras}}
+    {{#each script_extras}}
+      <script type="text/javascript" src="/js/{{this}}"></script>
+    {{/each}}  
+  {{/if}}
 
   <!-- Render script for logged in users only -->
   {{#if logged_in}}

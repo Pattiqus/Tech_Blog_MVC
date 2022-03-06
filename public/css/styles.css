@@ -1,0 +1,30 @@
+/**
+*   File: main.scss
+*   Description: 
+*       Contains/imports all sub-level
+*       stylesheets for rendering to 
+*       front-end.
+*/
+/**
+*   File: login.scss
+*   Description: 
+*       Main file for login page
+*/
+main > div.content > div.login-wrapper {
+  position: relative;
+}
+
+main > div.content > div.login-wrapper form.login-form {
+  position: absolute;
+  bottom: 50%;
+  right: 50%;
+  min-width: 650px;
+  border-radius: 12px;
+  border: 1px solid #333333;
+  -webkit-transform: translate(50%, 50%);
+  -moz-transform: translate(50%, 50%);
+  -ms-transform: translate(50%, 50%);
+  -o-transform: translate(50%, 50%);
+}
+
+/*# sourceMappingURL=styles.css.map */

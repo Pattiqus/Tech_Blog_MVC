@@ -1,53 +1,58 @@
 import { isPropertyAccessChain } from "typescript";
 
-// const path = require("path");
-// const express = require("express");
-// const session = require("express-session");
-// const exphbs = require("express-handlebars");
-// const routes = require("./controllers");
-// const helpers = require("./utils/helpers");
 import path from "path";
 import express from "express";
-import * as session from "express-session";
+import session = require("express-session");
 import * as exphbs from "express-handlebars";
 import appRouter from "./routes";
 import * as helpers from "./utils/helpers";
+import * as viewHelpers from "./utils/views/handlebarsHelpers";
 
 import sequelize from "./config/connection";
-// const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
+import SequelizeStore = require("connect-session-sequelize");
+const seqStore = SequelizeStore(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Set up Handlebars.js engine with custom helpers
-const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({
+  extname: ".hbs",
+  defaultLayout: "main",
+  layoutsDir: path.join(__dirname, "../views/layouts"),
+  partialsDir: path.join(__dirname, "../views/partials"),
+  helpers: viewHelpers.getHelpers(),
+});
+console.log(hbs);
 
-// const sess = {
-//   secret: process.env.DB_SECRET,
-//   cookie: {},
-//   resave: false,
-//   saveUninitialized: true,
-//   store: new SequelizeStore({
-//     db: sequelize,
-//   }),
-// };
+const sess = {
+  secret: process.env.DB_SECRET,
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new seqStore({
+    db: sequelize,
+  }),
+};
 
-// app.use(session(sess));
+app.use(session(sess));
 
 // Inform Express.js on which template engine to use
 app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars");
+app.set("view engine", ".hbs");
+app.set("view options", { layout: "layouts/main" });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../public")));
 
-app.get("/some-resource", (req, res, next) => {
-  res.json("Hello World");
-});
+// app.get("/some-resource", (req, res, next) => {
+//   res.json("Hello World");
+// });
+
 app.use(appRouter);
 
-app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
-// sequelize.sync({ force: false }).then(() => {
-//   app.listen(PORT, () => console.log("Now listening"));
-// });
+// app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log("Now listening"));
+});

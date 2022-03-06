@@ -26,43 +26,48 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// const path = require("path");
-// const express = require("express");
-// const session = require("express-session");
-// const exphbs = require("express-handlebars");
-// const routes = require("./controllers");
-// const helpers = require("./utils/helpers");
 var path_1 = __importDefault(require("path"));
 var express_1 = __importDefault(require("express"));
+var session = require("express-session");
 var exphbs = __importStar(require("express-handlebars"));
 var routes_1 = __importDefault(require("./routes"));
-var helpers = __importStar(require("./utils/helpers"));
-// const SequelizeStore = require("connect-session-sequelize")(session.Store);
+var viewHelpers = __importStar(require("./utils/views/handlebarsHelpers"));
+var connection_1 = __importDefault(require("./config/connection"));
+var SequelizeStore = require("connect-session-sequelize");
+var seqStore = SequelizeStore(session.Store);
 var app = (0, express_1.default)();
 var PORT = process.env.PORT || 3001;
 // Set up Handlebars.js engine with custom helpers
-var hbs = exphbs.create({ helpers: helpers });
-// const sess = {
-//   secret: process.env.DB_SECRET,
-//   cookie: {},
-//   resave: false,
-//   saveUninitialized: true,
-//   store: new SequelizeStore({
-//     db: sequelize,
-//   }),
-// };
-// app.use(session(sess));
+var hbs = exphbs.create({
+    extname: ".hbs",
+    defaultLayout: "main",
+    layoutsDir: path_1.default.join(__dirname, "../views/layouts"),
+    partialsDir: path_1.default.join(__dirname, "../views/partials"),
+    helpers: viewHelpers.getHelpers(),
+});
+console.log(hbs);
+var sess = {
+    secret: process.env.DB_SECRET,
+    cookie: {},
+    resave: false,
+    saveUninitialized: true,
+    store: new seqStore({
+        db: connection_1.default,
+    }),
+};
+app.use(session(sess));
 // Inform Express.js on which template engine to use
 app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars");
+app.set("view engine", ".hbs");
+app.set("view options", { layout: "layouts/main" });
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
-app.get("/some-resource", function (req, res, next) {
-    res.json("Hello World");
-});
-app.use(routes_1.default);
-app.listen(PORT, function () { return console.log("Now listening on port ".concat(PORT)); });
-// sequelize.sync({ force: false }).then(() => {
-//   app.listen(PORT, () => console.log("Now listening"));
+app.use(express_1.default.static(path_1.default.join(__dirname, "../public")));
+// app.get("/some-resource", (req, res, next) => {
+//   res.json("Hello World");
 // });
+app.use(routes_1.default);
+// app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
+connection_1.default.sync({ force: false }).then(function () {
+    app.listen(PORT, function () { return console.log("Now listening"); });
+});
