@@ -23,26 +23,26 @@ var sequelize_1 = require("sequelize");
 var bcrypt_1 = __importDefault(require("bcrypt"));
 // const bcrypt = require('bcrypt');
 var connection_1 = __importDefault(require("../config/connection"));
-var User = /** @class */ (function (_super) {
-    __extends(User, _super);
-    function User() {
+var Users = /** @class */ (function (_super) {
+    __extends(Users, _super);
+    function Users() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    User.prototype.checkPassword = function (loginPw) {
+    Users.prototype.checkPassword = function (loginPw) {
         return bcrypt_1.default.compareSync(loginPw, this.password);
     };
-    User.prototype.hashPassword = function (userData) {
+    Users.prototype.hashPassword = function (userData) {
         return bcrypt_1.default.hash(userData.password, 10);
     };
-    User.prototype.getPassword = function () {
+    Users.prototype.getPassword = function () {
         return this.password;
     };
-    User.prototype.setPassword = function (password) {
+    Users.prototype.setPassword = function (password) {
         this.password = password;
     };
-    return User;
+    return Users;
 }(sequelize_1.Model));
-User.init({
+Users.init({
     id: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
@@ -81,7 +81,7 @@ User.init({
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: "user",
+    modelName: "users",
 });
 // module.exports = User;
-exports.default = User;
+exports.default = Users;

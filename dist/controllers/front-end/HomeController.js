@@ -26,6 +26,7 @@ var HomeController = /** @class */ (function (_super) {
     HomeController.prototype.showHomePage = function (req, res) {
         var homePageData = {
             title: "Hello World",
+            loggedIn: req.session.logged_in,
         };
         // res.send("Hello world");
         res.render("index", homePageData);

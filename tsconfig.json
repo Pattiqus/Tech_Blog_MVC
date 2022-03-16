@@ -13,6 +13,6 @@
         "routes/*": [ "src/controllers/*" ],
       }
     },
-    "include": ["src/**/*.ts", "types"],
+    "include": ["src/**/*.ts", "types/*.d.ts"],
     "exclude": ["node_modules", ".vscode", "tests/**/*.ts"]
   }

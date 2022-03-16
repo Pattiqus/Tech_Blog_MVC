@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 // const bcrypt = require('bcrypt');
 import sequelize from "../config/connection";
 
-class User extends Model {
+class Users extends Model {
   public id!: number;
   public username: string;
   public email: string;
@@ -28,7 +28,7 @@ class User extends Model {
   }
 }
 
-User.init(
+Users.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -69,9 +69,9 @@ User.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: "user",
+    modelName: "users",
   }
 );
 
 // module.exports = User;
-export default User;
+export default Users;
