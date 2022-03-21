@@ -7,7 +7,7 @@
 		"../../src/assets/sass/admin/_dashboard.scss"
 	],
 	"sourcesContent": [
-		"/**\r\n*   File: main.scss\r\n*   Description: \r\n*       Contains/imports all sub-level\r\n*       stylesheets for rendering to \r\n*       front-end.\r\n*/\r\n\r\n\r\n// # Typography\r\n\r\n\r\n// # Components\r\n\r\n\r\n\r\n// # Pages\r\n@import \"./login/login\";\r\n@import \"./admin/dashboard\";",
+		"/**\r\n*   File: main.scss\r\n*   Description: \r\n*       Contains/imports all sub-level\r\n*       stylesheets for rendering to \r\n*       front-end.\r\n*/\r\n\r\n\r\n// # Typography\r\n\r\n\r\n// # Components\r\n\r\n\r\n\r\n// # Pages\r\n@import \"./login/login\";\r\n@import \"./admin/dashboard\";\r\n\r\n",
 		"/**\r\n*   File: login.scss\r\n*   Description: \r\n*       Main file for login page\r\n*/\r\n\r\n$form-border-color: #333333;\r\n\r\nmain > div.content > div.login-wrapper {\r\n\r\n    position: relative;\r\n\r\n    form.login-form {\r\n        position: absolute;\r\n        bottom: 50%;\r\n        right: 50%;\r\n        min-width: 650px;\r\n        \r\n        border-radius: 12px;\r\n        border: 1px solid $form-border-color;\r\n        -webkit-transform: translate(50%, 50%);\r\n        -moz-transform: translate(50%, 50%);\r\n        -ms-transform: translate(50%, 50%);\r\n        -o-transform: translate(50%, 50%);\r\n    }\r\n\r\n}",
 		""
 	],

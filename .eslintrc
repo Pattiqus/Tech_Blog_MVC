@@ -32,7 +32,7 @@
     "max-len": [2, 120, 2],
     "no-console": "warn",
     "jsx-a11y/label-has-associated-control": "off",
-    "prettier/prettier": ["warn"],
+    "prettier/prettier": ["off"],
     "prefer-promise-reject-errors": "off",
     "camelcase": "off",
     "@typescript-eslint/no-namespace": "off"
