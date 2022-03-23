@@ -28,7 +28,6 @@ var HomeController = /** @class */ (function (_super) {
             title: "Hello World",
             loggedIn: req.session.logged_in,
         };
-        // res.send("Hello world");
         res.render("index", homePageData);
     };
     return HomeController;

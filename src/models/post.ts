@@ -1,5 +1,4 @@
 import { Model, DataTypes } from "sequelize";
-// const { Model, DataTypes } = require('sequelize');
 import sequelize from "../config/connection";
 
 class Post extends Model {}
@@ -16,9 +15,14 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    contents: {
+    content: {
       type: DataTypes.TEXT,
       allowNull: false,
+    },
+    date_created: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -31,7 +35,7 @@ Post.init(
   },
   {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: "post",

@@ -19,7 +19,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var sequelize_1 = require("sequelize");
-// const { Model, DataTypes } = require('sequelize');
 var connection_1 = __importDefault(require("../config/connection"));
 var Post = /** @class */ (function (_super) {
     __extends(Post, _super);
@@ -39,9 +38,14 @@ Post.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    contents: {
+    content: {
         type: sequelize_1.DataTypes.TEXT,
         allowNull: false,
+    },
+    date_created: {
+        type: sequelize_1.DataTypes.DATE,
+        allowNull: false,
+        defaultValue: sequelize_1.DataTypes.NOW,
     },
     user_id: {
         type: sequelize_1.DataTypes.INTEGER,
@@ -53,7 +57,7 @@ Post.init({
     },
 }, {
     sequelize: connection_1.default,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: "post",

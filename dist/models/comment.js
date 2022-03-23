@@ -19,8 +19,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@sequelize/core");
-// const { Model, DataTypes } = require('sequelize');
-// const sequelize = require("../config/connection");
 var connection_1 = __importDefault(require("../config/connection"));
 var Comment = /** @class */ (function (_super) {
     __extends(Comment, _super);
@@ -56,6 +54,11 @@ Comment.init({
             key: "id",
         },
     },
+    date_commented: {
+        type: core_1.DataTypes.DATE,
+        allowNull: false,
+        defaultValue: core_1.DataTypes.NOW,
+    }
 }, {
     sequelize: connection_1.default,
     timestamps: false,
@@ -63,5 +66,4 @@ Comment.init({
     underscored: true,
     modelName: "post",
 });
-// module.exports = Comment;
 exports.default = Comment;

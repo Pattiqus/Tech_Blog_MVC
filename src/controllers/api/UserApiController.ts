@@ -1,6 +1,6 @@
 import { Controller } from "../Controller";
 import { Request, Response, Router } from "express";
-import { Users } from "../../models";
+import { User } from "../../models";
 import session from "express-session";
 
 export class UserController extends Controller {
@@ -9,7 +9,7 @@ export class UserController extends Controller {
   createUser() {
     this.router.post("/", async (req: Request, res: Response) => {
       try {
-        const userData = await Users.create(req.body);
+        const userData = await User.create(req.body);
 
         req.session.save(() => {
           req.session.user_id = userData.id;
@@ -25,7 +25,7 @@ export class UserController extends Controller {
   loginUser() {
     this.router.post("/login", async (req: Request, res: Response) => {
       try {
-        const userData = await Users.findOne({
+        const userData = await User.findOne({
           where: { email: req.body.email },
         });
 

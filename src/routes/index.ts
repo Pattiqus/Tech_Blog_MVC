@@ -2,6 +2,7 @@ import { Request, Response, Router } from "express";
 import { CommentApiController } from "../controllers/api/comment.api.controller";
 import { HomeController } from "../controllers/front-end/HomeController";
 import { LoginController } from "../controllers/front-end/LoginController";
+import { UserController } from "../controllers/api/UserApiController";
 
 /**
  * Function: routes
@@ -12,6 +13,7 @@ const appRouter = Router();
 const homeController = new HomeController();
 const loginController = new LoginController();
 const commentApiController = new CommentApiController();
+const UserApiController = new UserController();
 
 // # Initial Routes: Front End
 appRouter.get("/", homeController.showHomePage);

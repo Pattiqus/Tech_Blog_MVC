@@ -68,7 +68,7 @@ var UserController = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, models_1.Users.create(req.body)];
+                        return [4 /*yield*/, models_1.User.create(req.body)];
                     case 1:
                         userData_1 = _a.sent();
                         req.session.save(function () {
@@ -95,7 +95,7 @@ var UserController = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, models_1.Users.findOne({
+                        return [4 /*yield*/, models_1.User.findOne({
                                 where: { email: req.body.email },
                             })];
                     case 1:

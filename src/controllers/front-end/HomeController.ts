@@ -9,7 +9,10 @@ export class HomeController extends Controller {
       title: "Hello World",
       loggedIn: req.session.logged_in,
     };
-    // res.send("Hello world");
     res.render("index", homePageData);
   }
+
+  // showPosts(req: Request, res: Response) {
+
+  // }
 }

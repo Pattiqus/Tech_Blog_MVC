@@ -1,7 +1,4 @@
 import { Model, DataTypes } from "@sequelize/core";
-// const { Model, DataTypes } = require('sequelize');
-// const sequelize = require("../config/connection");
-
 import sequelize from "../config/connection";
 
 class Comment extends Model {}
@@ -34,6 +31,11 @@ Comment.init(
         key: "id",
       },
     },
+    date_commented: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    }
   },
   {
     sequelize,
@@ -44,5 +46,4 @@ Comment.init(
   }
 );
 
-// module.exports = Comment;
 export default Comment;
