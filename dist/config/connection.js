@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var sequelize_1 = require("sequelize");
+const sequelize_1 = require("sequelize");
 require("dotenv/config");
-var sequelize;
+let sequelize;
 if (process.env.JAWSDB_URL) {
     sequelize = new sequelize_1.Sequelize(process.env.JAWSDB_URL);
     console.log("Can read JAWS");

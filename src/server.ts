@@ -2,7 +2,7 @@ import { isPropertyAccessChain } from "typescript";
 
 import path from "path";
 import express from "express";
-import session = require("express-session");
+import session from "express-session";
 import * as exphbs from "express-handlebars";
 import appRouter from "./routes";
 import * as helpers from "./utils/helpers";
@@ -23,7 +23,7 @@ const hbs = exphbs.create({
   partialsDir: path.join(__dirname, "../views/partials"),
   helpers: viewHelpers.getHelpers(),
 });
-console.log(hbs);
+// console.log(hbs);
 
 const sess = {
   secret: process.env.DB_SECRET,

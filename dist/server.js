@@ -26,27 +26,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var path_1 = __importDefault(require("path"));
-var express_1 = __importDefault(require("express"));
-var session = require("express-session");
-var exphbs = __importStar(require("express-handlebars"));
-var routes_1 = __importDefault(require("./routes"));
-var viewHelpers = __importStar(require("./utils/views/handlebarsHelpers"));
-var connection_1 = __importDefault(require("./config/connection"));
-var SequelizeStore = require("connect-session-sequelize");
-var seqStore = SequelizeStore(session.Store);
-var app = (0, express_1.default)();
-var PORT = process.env.PORT || 3001;
+const path_1 = __importDefault(require("path"));
+const express_1 = __importDefault(require("express"));
+const express_session_1 = __importDefault(require("express-session"));
+const exphbs = __importStar(require("express-handlebars"));
+const routes_1 = __importDefault(require("./routes"));
+const viewHelpers = __importStar(require("./utils/views/handlebarsHelpers"));
+const connection_1 = __importDefault(require("./config/connection"));
+const SequelizeStore = require("connect-session-sequelize");
+const seqStore = SequelizeStore(express_session_1.default.Store);
+const app = (0, express_1.default)();
+const PORT = process.env.PORT || 3001;
 // Set up Handlebars.js engine with custom helpers
-var hbs = exphbs.create({
+const hbs = exphbs.create({
     extname: ".hbs",
     defaultLayout: "main",
     layoutsDir: path_1.default.join(__dirname, "../views/layouts"),
     partialsDir: path_1.default.join(__dirname, "../views/partials"),
     helpers: viewHelpers.getHelpers(),
 });
-console.log(hbs);
-var sess = {
+// console.log(hbs);
+const sess = {
     secret: process.env.DB_SECRET,
     cookie: {},
     resave: false,
@@ -55,7 +55,7 @@ var sess = {
         db: connection_1.default,
     }),
 };
-app.use(session(sess));
+app.use((0, express_session_1.default)(sess));
 // Inform Express.js on which template engine to use
 app.engine("handlebars", hbs.engine);
 app.set("view engine", ".hbs");
@@ -68,6 +68,6 @@ app.use(express_1.default.static(path_1.default.join(__dirname, "../public")));
 // });
 app.use(routes_1.default);
 // app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
-connection_1.default.sync({ force: false }).then(function () {
-    app.listen(PORT, function () { return console.log("Now listening"); });
+connection_1.default.sync({ force: false }).then(() => {
+    app.listen(PORT, () => console.log("Now listening"));
 });

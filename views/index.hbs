@@ -2,11 +2,11 @@
 <div class="col-md-12 col-lg-9 col-xl-8">
     <hr class="my-4" />
     <div class="blog-preview">
-        <a href="/blog/{{blog.id}}" class="text-decoration-none" />
+        <a href="/blog/{{post.id}}" class="text-decoration-none" />
         <h3 class="title">{{title}}</h3>
         </a>
         <p class="post_meta">
-            Posted by {{users.name}} on {{format_date date_created}}
+            Posted by {{user.username}} on {{format_date date_created}}
         </p>
         <div>
             {{content}}

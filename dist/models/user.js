@@ -1,53 +1,47 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var sequelize_1 = require("sequelize");
+const sequelize_1 = require("sequelize");
 // const { Model, DataTypes } = require('sequelize');
-var bcrypt_1 = __importDefault(require("bcrypt"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 // const bcrypt = require('bcrypt');
-var connection_1 = __importDefault(require("../config/connection"));
-var user = /** @class */ (function (_super) {
-    __extends(user, _super);
-    function user() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    user.prototype.checkPassword = function (loginPw) {
+const connection_1 = __importDefault(require("../config/connection"));
+class user extends sequelize_1.Model {
+    checkPassword(loginPw) {
         return bcrypt_1.default.compareSync(loginPw, this.password);
-    };
-    user.prototype.hashPassword = function (userData) {
+    }
+    hashPassword(userData) {
         return bcrypt_1.default.hash(userData.password, 10);
-    };
-    user.prototype.getPassword = function () {
+    }
+    getPassword() {
         return this.password;
-    };
-    user.prototype.setPassword = function (password) {
+    }
+    setPassword(password) {
         this.password = password;
-    };
-    return user;
-}(sequelize_1.Model));
+    }
+}
 user.init({
     id: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
+    },
+    username: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        unique: true
     },
     email: {
         type: sequelize_1.DataTypes.STRING,
@@ -60,24 +54,25 @@ user.init({
     password: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        validate: {
-            length: 8,
-        },
+        // validate: {
+        //   length: 8,
+        // },
     },
 }, {
     hooks: {
-        beforeCreate: function (userData, options) {
-            userData.password = userData.hashPassword(userData);
-        },
-        beforeUpdate: function (userData) {
-            userData.password = userData.hashPassword(userData);
-        },
+        beforeCreate: (userData, options) => __awaiter(void 0, void 0, void 0, function* () {
+            userData.password = yield userData.hashPassword(userData);
+        }),
+        beforeUpdate: (userData) => __awaiter(void 0, void 0, void 0, function* () {
+            userData.password = yield userData.hashPassword(userData);
+        }),
     },
     sequelize: connection_1.default,
     timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: "user",
+    tableName: "user",
 });
 // module.exports = User;
 exports.default = user;

@@ -5,7 +5,7 @@ export class LoginController extends Controller {
   showLoginPage(req: Request, res: Response) {
     // # Retrieve: Data
     const loginPageData = {
-      script_extras: ["login.js"],
+      script_extras: ["loginSignup.js"],
       styles_extras: [],
     };
     // # Render: View

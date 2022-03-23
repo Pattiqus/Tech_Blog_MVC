@@ -25,6 +25,7 @@ appRouter.get("/test", (req: Request, res: Response) => {
 // # Client-Side: Login Page
 appRouter.get("/login", loginController.showLoginPage);
 appRouter.post("/api/v1/auth", loginController.showLoginPage);
+appRouter.post("/api/v1/user", UserApiController.createUser);
 
 // # Back-End Routes
 // # API Routes
