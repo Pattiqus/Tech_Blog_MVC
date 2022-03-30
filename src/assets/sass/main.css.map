@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAAA;;;;;;EAME;ACNF;;;;EAIE;AAIF,AAAA,IAAI,GAAG,GAAG,AAAA,QAAQ,GAAG,GAAG,AAAA,cAAc,CAAC;EAEnC,QAAQ,EAAE,QAAQ;CAgBrB;;AAlBD,AAII,IAJA,GAAG,GAAG,AAAA,QAAQ,GAAG,GAAG,AAAA,cAAc,CAIlC,IAAI,AAAA,WAAW,CAAC;EACZ,QAAQ,EAAE,QAAQ;EAClB,MAAM,EAAE,GAAG;EACX,KAAK,EAAE,GAAG;EACV,SAAS,EAAE,KAAK;EAEhB,aAAa,EAAE,IAAI;EACnB,MAAM,EAAE,GAAG,CAAC,KAAK,CAbL,OAAO;EAcnB,iBAAiB,EAAE,mBAAmB;EACtC,cAAc,EAAE,mBAAmB;EACnC,aAAa,EAAE,mBAAmB;EAClC,YAAY,EAAE,mBAAmB;CACpC",
+    "sources": [
+        "main.scss",
+        "login/_login.scss",
+        "admin/_dashboard.scss"
+    ],
+    "names": [],
+    "file": "main.css"
+}

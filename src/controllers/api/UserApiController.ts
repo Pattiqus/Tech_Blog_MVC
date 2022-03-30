@@ -1,10 +1,8 @@
 import { Controller } from "../Controller";
-import { Request, Response, Router } from "express";
+import { Request, Response } from "express";
 import { User } from "../../models";
-import session from "express-session";
 
 export class UserController extends Controller {
-  private router: Router;
   // #: Create User
   createUser = async (req: Request, res: Response) => {
     // # Detect: Empty object, return error 
