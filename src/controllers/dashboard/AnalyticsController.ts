@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { Post, User, Comment } from "../../models";
 
 
-export class DashboardController extends Controller {
+export class AnalyticsController extends Controller {
 
     populateDashboard = async (req: Request, res: Response) => {
         try {

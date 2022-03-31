@@ -14,7 +14,7 @@ Comment.init({
         primaryKey: true,
         autoIncrement: true,
     },
-    contents: {
+    content: {
         type: core_1.DataTypes.TEXT,
         allowNull: false,
     },

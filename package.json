@@ -14,7 +14,7 @@
     "build": "npm-run-all clean lint tsc process-styles",
     "dev:start": "npm-run-all build start",
     "dev": "nodemon --watch src -e ts,ejs --exec npm run dev:start",
-    "start": "node dist/server.js",
+    "start": "cd dist && node server.js",
     "seed": "cd dist && seeds/seed.js"
   },
   "repository": {

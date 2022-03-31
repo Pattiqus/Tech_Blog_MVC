@@ -2,7 +2,7 @@ import { Controller } from "../Controller";
 import { Request, Response } from "express";
 import { Post } from "../../models";
 
-export class PostController extends Controller {
+export class PostApiController extends Controller {
     /**
      * Function: CreatePost
      * Description: Controller for creating post

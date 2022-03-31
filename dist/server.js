@@ -45,7 +45,8 @@ const hbs = exphbs.create({
     partialsDir: path_1.default.join(__dirname, "../views/partials"),
     helpers: viewHelpers.getHelpers(),
 });
-// console.log(hbs);
+console.log(path_1.default.join(__dirname, "../views/layouts"));
+console.log(path_1.default.join(__dirname, "../views/partials"));
 const sess = {
     secret: process.env.DB_SECRET,
     cookie: {},
@@ -59,6 +60,7 @@ app.use((0, express_session_1.default)(sess));
 // Inform Express.js on which template engine to use
 app.engine("handlebars", hbs.engine);
 app.set("view engine", ".hbs");
+app.set("views", path_1.default.join(__dirname, "../views"));
 app.set("view options", { layout: "layouts/main" });
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
@@ -66,7 +68,7 @@ app.use(express_1.default.static(path_1.default.join(__dirname, "../public")));
 // app.get("/some-resource", (req, res, next) => {
 //   res.json("Hello World");
 // });
-app.use(routes_1.default);
+(0, routes_1.default)(app);
 // app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
 connection_1.default.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log("Now listening"));

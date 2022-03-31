@@ -2,7 +2,7 @@ import { Controller } from "../Controller";
 import { Request, Response } from "express";
 import { User } from "../../models";
 
-export class UserController extends Controller {
+export class UserApiController extends Controller {
   // #: Create User
   createUser = async (req: Request, res: Response) => {
     // # Detect: Empty object, return error 

@@ -4,7 +4,7 @@ import path from "path";
 import express from "express";
 import session from "express-session";
 import * as exphbs from "express-handlebars";
-import appRouter from "./routes";
+import generateRoutes from "./routes";
 import * as helpers from "./utils/helpers";
 import * as viewHelpers from "./utils/views/handlebarsHelpers";
 
@@ -23,7 +23,8 @@ const hbs = exphbs.create({
   partialsDir: path.join(__dirname, "../views/partials"),
   helpers: viewHelpers.getHelpers(),
 });
-// console.log(hbs);
+console.log(path.join(__dirname, "../views/layouts"));
+console.log(path.join(__dirname, "../views/partials"));
 
 const sess = {
   secret: process.env.DB_SECRET,
@@ -40,6 +41,7 @@ app.use(session(sess));
 // Inform Express.js on which template engine to use
 app.engine("handlebars", hbs.engine);
 app.set("view engine", ".hbs");
+app.set("views", path.join(__dirname, "../views") );
 app.set("view options", { layout: "layouts/main" });
 
 app.use(express.json());
@@ -50,7 +52,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 //   res.json("Hello World");
 // });
 
-app.use(appRouter);
+generateRoutes(app);
 
 // app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
 sequelize.sync({ force: false }).then(() => {

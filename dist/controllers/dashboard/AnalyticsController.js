@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DashboardController = void 0;
+exports.AnalyticsController = void 0;
 const Controller_1 = require("../Controller");
 const models_1 = require("../../models");
-class DashboardController extends Controller_1.Controller {
+class AnalyticsController extends Controller_1.Controller {
     constructor() {
         super(...arguments);
         this.populateDashboard = (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -92,4 +92,4 @@ class DashboardController extends Controller_1.Controller {
         });
     }
 }
-exports.DashboardController = DashboardController;
+exports.AnalyticsController = AnalyticsController;

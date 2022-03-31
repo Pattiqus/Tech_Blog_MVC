@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserController = void 0;
+exports.UserApiController = void 0;
 const Controller_1 = require("../Controller");
 const models_1 = require("../../models");
-class UserController extends Controller_1.Controller {
+class UserApiController extends Controller_1.Controller {
     constructor() {
         super(...arguments);
         // #: Create User
@@ -27,7 +27,6 @@ class UserController extends Controller_1.Controller {
                 });
             }
             console.log(req.body);
-            // const userData = new User(req.body);
             try {
                 const userData = yield models_1.User.create(req.body);
                 console.log(userData);
@@ -46,41 +45,46 @@ class UserController extends Controller_1.Controller {
                 });
             }
         });
-    }
-    // # User login
-    loginUser() {
-        this.router.post("/login", (req, res) => __awaiter(this, void 0, void 0, function* () {
-            try {
-                const userData = yield models_1.User.findOne({
-                    where: { email: req.body.email },
+        // # User login
+        this.loginUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            if (Object.keys(req.body).length === 0) {
+                return res.status(500).json({
+                    success: false,
+                    message: "Invalid request body. Please add correct fields.",
+                    status_code: "USER_API_LOGIN_MISSING_FIELDS",
+                    error_message: null,
                 });
+            }
+            console.log(req.body);
+            try {
+                const userData = yield models_1.User.findOne(req.body.email);
+                console.log(userData);
                 if (!userData) {
-                    res
-                        .status(400)
-                        .json({ message: "Incorrect email or password, please try again" });
+                    res.status(400).json({ message: "Incorrect email or password, please try again" });
                     return;
                 }
                 const validPassword = yield userData.checkPassword(req.body.password);
                 if (!validPassword) {
-                    res
-                        .status(400)
-                        .json({ message: "Incorrect email or password, please try again" });
+                    res.status(400).json({ message: 'Incorrect email or password, please try again' });
                     return;
                 }
                 req.session.save(() => {
                     req.session.user_id = userData.id;
                     req.session.logged_in = true;
-                    res.json({ user: userData, message: "You are now logged in!" });
+                    return res.status(200).json(userData);
                 });
             }
             catch (err) {
-                res.status(400).json(err);
+                return res.status(500).json({
+                    success: false,
+                    message: "Could not successfully log in.",
+                    status_code: "USER_API_LOGIN_ERROR",
+                    error_message: err,
+                });
             }
-        }));
-    }
-    // # User logout
-    logoutUser() {
-        this.router.post("/logout", (req, res) => {
+        });
+        // # User logout
+        this.logoutUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
             if (req.session.logged_in) {
                 req.session.destroy(() => {
                     res.status(204).end();
@@ -92,4 +96,5 @@ class UserController extends Controller_1.Controller {
         });
     }
 }
-exports.UserController = UserController;
+exports.UserApiController = UserApiController;
+;
