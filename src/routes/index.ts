@@ -38,6 +38,10 @@ appRouter.post("/api/v1/user/logout", UserApiController.logoutUser);
 appRouter.post("/api/v1/post", withAuth, postApiController.createPost);
 appRouter.put("/api/v1/post/:id", withAuth, postApiController.updatePost);
 appRouter.put("/api/v1/post/:id", withAuth, postApiController.deletePost);
+appRouter.post("/api/v1/post/", withAuth, commentApiController.createComment);
+appRouter.post("/api/v1/post/", withAuth, commentApiController.updateComment);
+appRouter.post("/api/v1/post/", withAuth, commentApiController.deleteComment);
+
 //   app.get("/api/v1/comment", commentApiController);
 
 
