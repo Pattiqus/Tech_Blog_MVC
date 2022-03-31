@@ -4,6 +4,7 @@ import { HomeController } from "../controllers/front-end/HomeController";
 import { LoginController } from "../controllers/front-end/LoginController";
 import { UserController } from "../controllers/api/UserApiController";
 import { PostController } from "@/controllers/api/PostApiController";
+import withAuth from "@/utils/auth";
 
 /**
  * Function: routes
@@ -32,9 +33,11 @@ appRouter.post("/api/v1/auth", loginController.showLoginPage);
 // # Back-End Routes
 // # API Routes
 appRouter.post("/api/v1/user", UserApiController.createUser);
-appRouter.post("/api/v1/login",UserApiController.loginUser);
-appRouter.post("/api/v1/logout", UserApiController.logoutUser);
-appRouter.post("api/v1", postApiController.newPost)
+appRouter.post("/api/v1/user/login",UserApiController.loginUser);
+appRouter.post("/api/v1/user/logout", UserApiController.logoutUser);
+appRouter.post("/api/v1/post", withAuth, postApiController.createPost);
+appRouter.put("/api/v1/post/:id", withAuth, postApiController.updatePost);
+appRouter.put("/api/v1/post/:id", withAuth, postApiController.deletePost);
 //   app.get("/api/v1/comment", commentApiController);
 
 
